@@ -32,6 +32,7 @@ def main() -> None:
     caches = [
         BasicRedisCache(resolution=5, cache_limit=5000),
         KRingCache(resolution=6, cache_limit=2000, k=1),
+        KRingCache(resolution=6, cache_limit=1000, k=1),
     ]
 
     stats = defaultdict(list)

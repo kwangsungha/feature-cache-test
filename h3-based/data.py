@@ -1,5 +1,4 @@
 import json
-from collections import defaultdict
 import random
 from typing import Any
 from heapq import heappush, heappop

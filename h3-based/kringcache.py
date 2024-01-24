@@ -21,12 +21,15 @@ class KRingCache(BaseRedisCache):
 
         self.last_cached = None
 
-    def cache_key(self, loc: Location) -> list[str]:
+    def cache_key(self, cell):
+        return f"{str(self)}_{cell}"
+
+    def cache_keys(self, loc: Location) -> list[str]:
         cell = h3.geo_to_h3(loc.lat, loc.lng, self.resolution)
-        return h3.k_ring(cell, k=self.k)
+        return [self.cache_key(k) for k in h3.k_ring(cell, k=self.k)]
 
     def mget(self, loc: Location, keys: set[str]) -> list[tuple[str, Any]]:
-        names = self.cache_key(loc)
+        names = self.cache_keys(loc)
         values = self.db.mget(names)
         self.last_cached = values
 
@@ -52,7 +55,7 @@ class KRingCache(BaseRedisCache):
         caching = defaultdict(list)
         for key, value in values:
             lat, lng = value["lat"], value["lng"]
-            cell = h3.geo_to_h3(lat, lng, self.resolution)
+            cell = self.cache_key(h3.geo_to_h3(lat, lng, self.resolution))
             caching[cell].append((key, value))
             duplicate[cell].add(key)
 
