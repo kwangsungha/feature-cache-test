@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "localcache-test"
+version = "0.1.0"
+description = ""
+authors = ["kwangsung ha <kwangsung.ha@wesang.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+diskcache = "^5.6.3"
+aiocache = "^0.12.2"
+memcache = "^0.12.0"
+aiomcache = "^0.8.1"
+aiomultiprocess = "^0.9.0"
+lmdb = "^1.4.1"
+boltdb = "^0.0.2"
+cffi = "^1.16.0"
+python-snappy = "^0.6.1"
+orjson = "^3.9.12"
+msgspec = "^0.18.6"
+redis = "^5.0.1"
+geopy = "^2.4.1"
+loguru = "^0.7.2"
+h3 = "^3.7.6"
+black = "^23.12.1"
+numpy = "^1.26.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
